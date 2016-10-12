@@ -1,5 +1,6 @@
 var playgroundCalendar, playground_json, userConfig = {
-	inline: true
+	inline: true,
+	enableTime: true
 };
 
 function toggleConfig(e) {
@@ -20,24 +21,7 @@ function toggleConfig(e) {
 			? !Flatpickr.defaultConfig[option]
 			: e.target.value;
 
-
 	config[option] = userConfig[option];
-
-	if (config.enableTime) {
-		config.dateFormat = config.noCalendar
-			? "H:i" + (config.enableSeconds ? ":S" : "")
-			: Flatpickr.defaultConfig.dateFormat + " H:i" + (config.enableSeconds ? ":S" : "");
-
-		config.altFormat = config.noCalendar
-			? "h:i" + (config.enableSeconds ? ":S K" : " K")
-			: Flatpickr.defaultConfig.altFormat + " h:i" + (config.enableSeconds ? ":S" : "") + " K";
-	}
-
-	else {
-		config.dateFormat = Flatpickr.defaultConfig.dateFormat;
-		config.altFormat = Flatpickr.defaultConfig.altFormat;
-	}
-
 
 	if (selectedDates)
 		config.defaultDate = selectedDates;
@@ -46,6 +30,7 @@ function toggleConfig(e) {
 
 	playgroundCalendar.destroy();
 	playgroundCalendar = new Flatpickr(element, config);
+
 }
 
 function setupPlayground() {
